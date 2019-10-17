@@ -159,7 +159,7 @@ namespace PersonalRecord
             //Setting up variables 
             char[] delimiterChars = { ',', '|', '\t', ' ' };
 
-            int id = 1000; //Starting the ID at a sufficiently high number in case there are some IDs internally being used by .net.
+          
 
 
             if (!File.Exists(fileInput))
@@ -180,8 +180,6 @@ namespace PersonalRecord
                 var values = line.Split(delimiterChars);
                 char[] charsToTrim = { ' ', '\t' };
 
-
-                inputData.id = id; //the internal database requires a primary key. This is the key set for the internal database. 
                 inputData.lastName = values[0].ToString().Trim(charsToTrim);
                 inputData.firstName = values[1].ToString().Trim(charsToTrim);
                 inputData.gender = values[2].ToString().Trim(charsToTrim);
@@ -190,9 +188,6 @@ namespace PersonalRecord
 
               
                 recOps.Save(inputData);
-
-                id++;
-
             }
             Console.WriteLine("File imported successfully!");
             return true;

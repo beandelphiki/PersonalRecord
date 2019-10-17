@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalRecord", "PersonalR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalRecordAPI", "PersonalRecordAPI\PersonalRecordAPI.csproj", "{9168767E-8584-4848-8A44-B1717325CAA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonaRecordAPI.tests", "PersonalRecordAPI\PersonaRecordAPI.tests\PersonaRecordAPI.tests.csproj", "{2A53340D-3E40-4889-B9AA-21093E431BCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalRecord.tests", "PersonalRecord\PersonalRecord.tests\PersonalRecord.tests.csproj", "{D4264146-865A-46C9-9DB8-B94B09762E80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +23,13 @@ Global
 		{9168767E-8584-4848-8A44-B1717325CAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9168767E-8584-4848-8A44-B1717325CAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9168767E-8584-4848-8A44-B1717325CAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A53340D-3E40-4889-B9AA-21093E431BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A53340D-3E40-4889-B9AA-21093E431BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A53340D-3E40-4889-B9AA-21093E431BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A53340D-3E40-4889-B9AA-21093E431BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4264146-865A-46C9-9DB8-B94B09762E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4264146-865A-46C9-9DB8-B94B09762E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4264146-865A-46C9-9DB8-B94B09762E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4264146-865A-46C9-9DB8-B94B09762E80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
