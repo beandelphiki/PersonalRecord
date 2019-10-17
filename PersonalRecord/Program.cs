@@ -72,18 +72,23 @@ namespace PersonalRecord
                 switch (input)
                 {
                     case "B":
+                    case "b":
+
                         Console.WriteLine("Reached the sort by birth date method!");
                         Console.WriteLine(Environment.NewLine);
                         recOps.SortByBirthDate();
                         break;
 
                     case "G":
+                    case "g":
+
                         Console.WriteLine("Reached the sort by gender method!");
                         Console.WriteLine(Environment.NewLine);
                         recOps.SortByGender();
                         break;
 
                     case "N":
+                    case "n":
                         Console.WriteLine("Reached the sort by name method!");
                         Console.WriteLine(Environment.NewLine);
                         recOps.SortByLastName();
@@ -97,7 +102,7 @@ namespace PersonalRecord
 
 
             }
-            while (input != "Q");
+            while (input != "q");
             #endregion
 
 
