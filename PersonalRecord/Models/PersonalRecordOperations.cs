@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using PersonalRecord.Models;
 
 
 namespace PersonalRecord.Models
@@ -9,6 +8,10 @@ namespace PersonalRecord.Models
 {
     public class PersonalRecordOperations
     {
+        /// <summary>
+        /// This is the DB context used for the console application.
+        /// It is an in-memory database.
+        /// </summary>
         protected static RecordDBContext context = new RecordDBContext();
 
 
@@ -29,7 +32,7 @@ namespace PersonalRecord.Models
         /// The data store sorted by gender as a string
         /// </returns>
 
-        public Record[] SortByGender()
+        public void SortByGender()
         {
 
 
@@ -37,32 +40,14 @@ namespace PersonalRecord.Models
 
             if (returnData.Count == 0 || returnData == null)
             {
-
                 Console.WriteLine("There was no data to return — Empty Set.");
-                return returnData.ToArray();
-
+                return;
             }
-
 
             else
             {
-                /*
-                 *  string json = "";
-                 *  json = JsonConvert.SerializeObject(returnData);
-                 *  Console.WriteLine(json);
-                 *  return json;
-                */
-
-
-                string concatentatedData = "";
-                foreach (Record item in returnData)
-                {
-                    concatentatedData += item.lastName + ", " + item.firstName + ", " + item.dateOfBirth + ", " + item.favoriteColor + ", " + item.gender;
-                    concatentatedData += Environment.NewLine;
-                }
-                Console.WriteLine(concatentatedData);
-                return returnData.ToArray();
-
+                outputResults(returnData);
+                return;
 
             }
 
@@ -91,19 +76,8 @@ namespace PersonalRecord.Models
 
             else
             {
-                /*json = JsonConvert.SerializeObject(returnData);
-                Console.WriteLine(json);
-                return json;*/
-
-                string concatentatedData = "";
-                foreach (Record item in returnData)
-                {
-                    concatentatedData += item.lastName + ", " + item.firstName + ", " + item.dateOfBirth + ", " + item.favoriteColor + ", " + item.gender;
-                    concatentatedData += Environment.NewLine;
-                }
-                Console.WriteLine(concatentatedData);
+                outputResults(returnData);
                 return;
-
             }
 
         }
@@ -119,45 +93,55 @@ namespace PersonalRecord.Models
         public void SortByLastName()
         {
 
-
             var returnData = context.recordList
                 .OrderByDescending(x => x.lastName).ToList();
 
             if (returnData.Count == 0 || returnData == null)
             {
-
                 Console.WriteLine("There was no data to return — Empty Set.");
                 return;
-
             }
 
 
             else
             {
-                //json = JsonConvert.SerializeObject(returnData);
-                //Console.WriteLine(json);
-                //return json;
-
-                string concatentatedData = "";
-                foreach (Record item in returnData)
-                {
-                    concatentatedData += item.lastName + ", " + item.firstName + ", " + item.dateOfBirth + ", " + item.favoriteColor + ", " + item.gender;
-                    concatentatedData += Environment.NewLine;
-                }
-                Console.WriteLine(concatentatedData);
+                outputResults(returnData);
                 return;
-
             }
 
         }
 
 
 
+
+        /// <summary>
+        /// This takes in a Record and posts it to the context.
+        /// </summary>
+        /// <param name="input"></param>
         public void Save(Record input) {
 
             context.recordList.Add(input);
             context.SaveChanges();
 
+        }
+
+
+
+        /// <summary>
+        /// This takes in a record and outputs the results.
+        /// </summary>
+        /// <param name="input"></param>
+        public void outputResults(List<Record> input) {
+
+            string concatentatedData = "";
+            foreach (Record item in input)
+            {
+                concatentatedData += item.lastName + ", " + item.firstName + ", " + item.dateOfBirth.ToString("M/d/yyyy") + ", " + item.favoriteColor + ", " + item.gender;
+                concatentatedData += Environment.NewLine;
+            }
+            Console.WriteLine(concatentatedData);
+
+            return;
         }
 
 

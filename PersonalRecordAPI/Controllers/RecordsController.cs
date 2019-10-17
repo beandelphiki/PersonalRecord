@@ -10,8 +10,30 @@ namespace PersonalRecordAPI.Models
     [ApiController]
     public class RecordsController : ControllerBase
     {
+        /// <summary>
+        /// This is the context for the data being used. It is an inmemory database.
+        /// </summary>
         protected static RecordEntryContext _context = new RecordEntryContext();
 
+        /// <summary>
+        /// These are the settings for the JSON Serializer used to modify the
+        /// date to the desired format.
+        /// </summary>
+        readonly JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            DateFormatString = "MM/dd/yyyy"
+        };
+
+
+
+
+
+        /// <summary>
+        /// This returns the collection sorted by gender where females are first, then males.
+        /// </summary>
+        /// <returns>
+        ///The rerturn type is a JSON Object that has the collection sorted by gender.
+        /// </returns>
         // GET api/records/gender
         [HttpGet("gender/")]
         public ActionResult<string> GetByGender()
@@ -28,13 +50,21 @@ namespace PersonalRecordAPI.Models
 
             else
             {
-                var json = JsonConvert.SerializeObject(returnData);
+                var json = JsonConvert.SerializeObject(returnData,settings);
                 return Ok(json);
 
             }
         }
 
 
+
+
+        /// <summary>
+        /// This returns the collection sorted by birthdate.
+        /// </summary>
+        /// <returns>
+        ///The rerturn type is a JSON Object that has the collection sorted by birthdate.
+        /// </returns>
         // GET api/records/birthdate
         [HttpGet("birthdate/")]
         public ActionResult<string> GetByBirthdate()
@@ -51,13 +81,20 @@ namespace PersonalRecordAPI.Models
 
             else
             {
-                var json = JsonConvert.SerializeObject(returnData);
+                var json = JsonConvert.SerializeObject(returnData,settings);
                 return Ok(json);
 
             }
         }
 
 
+
+        /// <summary>
+        /// This returns the collection sorted by last name descending.
+        /// </summary>
+        /// <returns>
+        ///The rerturn type is a JSON Object that has the collection sorted by last name descending.
+        /// </returns>
         // GET api/records/name
         [HttpGet("name/")]
         public ActionResult<string> GetByName()
@@ -76,7 +113,7 @@ namespace PersonalRecordAPI.Models
 
             else
             {
-                var json = JsonConvert.SerializeObject(returnData);
+                var json = JsonConvert.SerializeObject(returnData,settings);
                 return Ok(json);
 
             }
@@ -84,6 +121,16 @@ namespace PersonalRecordAPI.Models
 
 
 
+
+        /// <summary>
+        /// This posts a record formatted as a string into the collection
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>
+        /// 
+        ///This returns a JSON representation of the object applied to the data set.
+        ///
+        /// </returns>
         // POST api/records
         [HttpPost]
         public ActionResult<string> RawStringFormatter([FromBody] string value)

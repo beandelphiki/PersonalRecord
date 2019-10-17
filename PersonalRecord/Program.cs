@@ -9,14 +9,9 @@ namespace PersonalRecord
     class Program
     {
         /// <summary>
-        /// These are the data members for the program.
+        /// This gives us the ability to manage a single context and run operations on those records.
         /// </summary>
         protected static PersonalRecordOperations recOps = new PersonalRecordOperations();
-        
-        const string fileInput = "/Users/digital1/Documents/import_space.csv";
-
-
-
 
 
         static void Main(string[] args)
@@ -28,10 +23,8 @@ namespace PersonalRecord
             if (args.Length == 0) {
 
                 Console.WriteLine("Nothing was imported. Please select an item from the menu below");
-            
-                
-                //obtaining test input
-                 recOps.testInsertAndReturn();
+
+                return;
             }
 
 
@@ -104,7 +97,7 @@ namespace PersonalRecord
 
 
             }
-            while (input != "q");
+            while (input != "Q");
             #endregion
 
 
@@ -144,7 +137,7 @@ namespace PersonalRecord
 
 
 
-
+        #region file import functionality
         /// <summary>
         /// This method imports files for use in the system.
         /// </summary>
@@ -153,18 +146,14 @@ namespace PersonalRecord
         /// Returns true if the file can be imported; returns false if it can't import the file.
         /// </returns>
 
-
         private static bool importFile(string filename)
         {
             //Setting up variables 
             char[] delimiterChars = { ',', '|', '\t', ' ' };
 
-          
 
-
-            if (!File.Exists(fileInput))
+            if (filename == null || filename.Length == 0)
             {
-                Console.WriteLine("The file does not exist — Quitting");
                 return false;
             }
 
@@ -193,6 +182,7 @@ namespace PersonalRecord
             return true;
 
         }
+        #endregion
 
 
 
