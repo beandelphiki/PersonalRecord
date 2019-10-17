@@ -1,6 +1,5 @@
 using NUnit.Framework;
-using System.IO;
-using System;
+
 
 
 namespace PersonalRecord.Models
@@ -41,22 +40,43 @@ namespace PersonalRecord.Models
 
         #region Test Personal Record Operations Class
 
+
+        [Test]
+        public void TestPersonalRecOpsGenderFalse()
+        {
+            PersonalRecordOperations ops = new PersonalRecordOperations();
+            bool test = ops.SortByGender();
+            Assert.IsFalse(ops.SortByGender());
+
+        }
+
+
+        [Test]
+        public void TestPersonalRecOpsBirthdateFalse()
+        {
+            PersonalRecordOperations ops = new PersonalRecordOperations();
+            Assert.IsFalse(ops.SortByBirthDate());
+
+        }
+
+
+
+        [Test]
+        public void TestPersonalRecOpNamesFalse()
+        {
+            PersonalRecordOperations ops = new PersonalRecordOperations();
+            Assert.IsFalse(ops.SortByLastName());
+
+        }
+
+
+
         [Test]
         public void TestPersonalRecOpsGenderTrue() {
             Program.ImportFile("/Users/digital1/Documents/import_csv.csv");
 
             PersonalRecordOperations ops = new PersonalRecordOperations();
             Assert.IsTrue(ops.SortByGender());
-
-        }
-
-     
-
-        [Test]
-        public void TestPersonalRecOpsGenderFalse()
-        {
-            PersonalRecordOperations ops = new PersonalRecordOperations();
-            Assert.IsFalse(ops.SortByGender());
 
         }
 
@@ -75,16 +95,6 @@ namespace PersonalRecord.Models
 
 
         [Test]
-        public void TestPersonalRecOpsBirthdateFalse()
-        {
-            PersonalRecordOperations ops = new PersonalRecordOperations();
-            Assert.IsFalse(ops.SortByBirthDate());
-
-        }
-
-
-
-        [Test]
         public void TestPersonalRecOpsNamesTrue()
         {
             Program.ImportFile("/Users/digital1/Documents/import_csv.csv");
@@ -94,15 +104,6 @@ namespace PersonalRecord.Models
 
         }
 
-
-
-        [Test]
-        public void TestPersonalRecOpNamesFalse()
-        {
-            PersonalRecordOperations ops = new PersonalRecordOperations();
-            Assert.IsFalse(ops.SortByLastName());
-
-        }
         #endregion
 
 

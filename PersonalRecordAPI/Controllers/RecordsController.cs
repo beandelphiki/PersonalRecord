@@ -2,10 +2,12 @@
 using System;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PersonalRecordAPI.Models
 {
-  
+
     [Route("api/[controller]")]
     [ApiController]
     public class RecordsController : ControllerBase
@@ -50,7 +52,7 @@ namespace PersonalRecordAPI.Models
 
             else
             {
-                var json = JsonConvert.SerializeObject(returnData,settings);
+                var json = JsonConvert.SerializeObject(returnData, settings);
                 return Ok(json);
 
             }
@@ -69,19 +71,19 @@ namespace PersonalRecordAPI.Models
         [HttpGet("birthdate/")]
         public ActionResult<string> GetByBirthdate()
         {
-             var returnData = _context.recordListAPI.OrderBy(x => x.dateOfBirth)
-               .ToList();
+            var returnData = _context.recordListAPI.OrderBy(x => x.dateOfBirth)
+              .ToList();
 
-             if (returnData.Count == 0 || returnData == null)
-             {
+            if (returnData.Count == 0 || returnData == null)
+            {
 
                 return NoContent();
-             }
+            }
 
 
             else
             {
-                var json = JsonConvert.SerializeObject(returnData,settings);
+                var json = JsonConvert.SerializeObject(returnData, settings);
                 return Ok(json);
 
             }
@@ -99,9 +101,9 @@ namespace PersonalRecordAPI.Models
         [HttpGet("name/")]
         public ActionResult<string> GetByName()
         {
-             var returnData = _context.recordListAPI
-               .OrderByDescending(x => x.lastName)
-               .ToList();
+            var returnData = _context.recordListAPI
+              .OrderByDescending(x => x.lastName)
+              .ToList();
 
 
             if (returnData.Count == 0 || returnData == null)
@@ -113,14 +115,11 @@ namespace PersonalRecordAPI.Models
 
             else
             {
-                var json = JsonConvert.SerializeObject(returnData,settings);
+                var json = JsonConvert.SerializeObject(returnData, settings);
                 return Ok(json);
 
             }
         }
-
-
-
 
         /// <summary>
         /// This posts a record formatted as a string into the collection
@@ -135,7 +134,7 @@ namespace PersonalRecordAPI.Models
         [HttpPost]
         public ActionResult<string> RawStringFormatter([FromBody] string value)
         {
-            
+
             //Setting up variables 
             char[] delimiterChars = { ',', '|', '\t', ' ' };
             char[] charsToTrim = { ' ', '\t' };
@@ -167,6 +166,17 @@ namespace PersonalRecordAPI.Models
             }
         }
 
+
+
+
+        [HttpDelete]
+        public NoContentResult Delete()
+        {
+            var itemsToDelete = _context.recordListAPI.Where(x => x.id >= 1);
+            _context.recordListAPI.RemoveRange(itemsToDelete);
+            _context.SaveChanges();
+            return NoContent();
+        }
 
     }
 }
