@@ -6,7 +6,7 @@ using System.IO;
 
 namespace PersonalRecord
 {
-    class Program
+   public class Program
     {
         /// <summary>
         /// This gives us the ability to manage a single context and run operations on those records.
@@ -14,7 +14,7 @@ namespace PersonalRecord
         protected static PersonalRecordOperations recOps = new PersonalRecordOperations();
 
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string input;
 
@@ -22,7 +22,7 @@ namespace PersonalRecord
 
             if (args.Length == 0) {
 
-                Console.WriteLine("Nothing was imported. Please select an item from the menu below");
+                Console.WriteLine("Nothing was imported. Please run again.");
 
                 return;
             }
@@ -33,24 +33,17 @@ namespace PersonalRecord
             {
                 Console.WriteLine("There were too many parameters passed in. " +
                     "—  Ignoring the input.");
-                Console.WriteLine("Parameters passed in were the following : ");
-
-                foreach (string param in args) {
-
-                    Console.WriteLine(param);
-
-                }
+                return;
                 
             }
 
             else
             {
                 //Attempt to read in the file and see if it is valid.
-                bool success = importFile(args[0]);
+                bool success = ImportFile(args[0]);
 
                 if (!success)
                 {
-                    Console.WriteLine("Files not imported successfully.");
                     return;
                 }
 
@@ -151,11 +144,12 @@ namespace PersonalRecord
         /// Returns true if the file can be imported; returns false if it can't import the file.
         /// </returns>
 
-        private static bool importFile(string filename)
+        public static bool ImportFile(string filename)
         {
             //Setting up variables 
             char[] delimiterChars = { ',', '|', '\t', ' ' };
 
+            //Valdiate the file is there and can be accessed.
 
             if (filename == null || filename.Length == 0)
             {
@@ -163,29 +157,42 @@ namespace PersonalRecord
             }
 
 
-
-            var fileReader = new StreamReader(filename);
-
-            //Process the input
-            while (!fileReader.EndOfStream)
+            if (!File.Exists(filename))
             {
-                var inputData = new Record();
-                var line = fileReader.ReadLine();
-                var values = line.Split(delimiterChars);
-                char[] charsToTrim = { ' ', '\t' };
+                Console.WriteLine("File does not exist! - Quitting.");
+                return false;
 
-                inputData.lastName = values[0].ToString().Trim(charsToTrim);
-                inputData.firstName = values[1].ToString().Trim(charsToTrim);
-                inputData.gender = values[2].ToString().Trim(charsToTrim);
-                inputData.favoriteColor = values[3].ToString().Trim(charsToTrim);
-                inputData.dateOfBirth = DateTime.Parse(values[4].ToString());
-
-              
-                recOps.Save(inputData);
             }
-            Console.WriteLine("File imported successfully!");
-            return true;
+                
 
+
+
+
+
+            else
+            {
+                var fileReader = new StreamReader(filename);
+
+                //Process the input
+                while (!fileReader.EndOfStream)
+                {
+                    var inputData = new Record();
+                    var line = fileReader.ReadLine();
+                    var values = line.Split(delimiterChars);
+                    char[] charsToTrim = { ' ', '\t' };
+
+                    inputData.lastName = values[0].ToString().Trim(charsToTrim);
+                    inputData.firstName = values[1].ToString().Trim(charsToTrim);
+                    inputData.gender = values[2].ToString().Trim(charsToTrim);
+                    inputData.favoriteColor = values[3].ToString().Trim(charsToTrim);
+                    inputData.dateOfBirth = DateTime.Parse(values[4].ToString());
+
+
+                    recOps.Save(inputData);
+                }
+                Console.WriteLine("File imported successfully!");
+                return true;
+            }
         }
         #endregion
 

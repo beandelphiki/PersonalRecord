@@ -26,13 +26,13 @@ namespace PersonalRecord.Models
 
 
         /// <summary>
-        /// This function takes the data that is in the datastore and returns the list sorted by gender
+        /// This function takes the data that is in the datastore and outputs the list sorted by gender
         /// </summary>
         /// <returns>
-        /// The data store sorted by gender as a string
+        /// Returns false if no data as was found, returns true if it outputted data and found something.
         /// </returns>
 
-        public void SortByGender()
+        public bool SortByGender()
         {
 
 
@@ -41,13 +41,13 @@ namespace PersonalRecord.Models
             if (returnData.Count == 0 || returnData == null)
             {
                 Console.WriteLine("There was no data to return — Empty Set.");
-                return;
+                return false;
             }
 
             else
             {
                 outputResults(returnData);
-                return;
+                return true;
 
             }
 
@@ -55,13 +55,13 @@ namespace PersonalRecord.Models
 
 
         /// <summary>
-        /// This function takes the data that is in the datastore and returns the list sorted by birthdate
+        /// This function takes the data that is in the datastore and outputs the list sorted by birthdate
         /// </summary>
         /// <returns>
-        /// The data store sorted by birthdate as a string
+        /// Returns false if no data as was found, returns true if it outputted data and found something.
         /// </returns>
 
-        public void SortByBirthDate()
+        public bool SortByBirthDate()
         {
             var returnData = context.recordList.OrderBy(x => x.dateOfBirth).ToList();
 
@@ -69,7 +69,7 @@ namespace PersonalRecord.Models
             {
 
                 Console.WriteLine("There was no data to return — Empty Set.");
-                return;
+                return false;
 
             }
 
@@ -77,20 +77,20 @@ namespace PersonalRecord.Models
             else
             {
                 outputResults(returnData);
-                return;
+                return true;
             }
 
         }
 
 
         /// <summary>
-        /// This function takes the data that is in the datastore and returns the list sorted by last name
+        /// This function takes the data that is in the datastore and outputs the list sorted by last name
         /// </summary>
         /// <returns>
-        ///The data store sorted by last name as a string
+        /// Returns false if no data as was found, returns true if it outputted data and found something.
         /// </returns>
 
-        public void SortByLastName()
+        public bool SortByLastName()
         {
 
             var returnData = context.recordList
@@ -99,14 +99,14 @@ namespace PersonalRecord.Models
             if (returnData.Count == 0 || returnData == null)
             {
                 Console.WriteLine("There was no data to return — Empty Set.");
-                return;
+                return false;
             }
 
 
             else
             {
                 outputResults(returnData);
-                return;
+                return true;
             }
 
         }
@@ -131,7 +131,10 @@ namespace PersonalRecord.Models
         /// This takes in a record and outputs the results.
         /// </summary>
         /// <param name="input"></param>
-        public void outputResults(List<Record> input) {
+        /// <returns>
+        /// Returns the length of the strings outputted.
+        /// </returns>
+        public int outputResults(List<Record> input) {
 
             string concatentatedData = "";
             foreach (Record item in input)
@@ -141,7 +144,7 @@ namespace PersonalRecord.Models
             }
             Console.WriteLine(concatentatedData);
 
-            return;
+            return concatentatedData.Length;
         }
 
     }

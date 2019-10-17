@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalRecord", "PersonalR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalRecordAPI", "PersonalRecordAPI\PersonalRecordAPI.csproj", "{9168767E-8584-4848-8A44-B1717325CAA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalRecordTest", "PersonalRecordTest\PersonalRecordTest.csproj", "{AC5285E5-E3D8-4296-825F-058BB971D718}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{9168767E-8584-4848-8A44-B1717325CAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9168767E-8584-4848-8A44-B1717325CAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9168767E-8584-4848-8A44-B1717325CAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5285E5-E3D8-4296-825F-058BB971D718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5285E5-E3D8-4296-825F-058BB971D718}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5285E5-E3D8-4296-825F-058BB971D718}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5285E5-E3D8-4296-825F-058BB971D718}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
